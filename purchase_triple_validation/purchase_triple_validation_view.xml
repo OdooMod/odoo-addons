@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+     <record model="ir.ui.view" id="purchase_order_search_inherit">
+        <field name="name">purchase.order.list.select.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='draft']" position="after">
+                <filter icon="terp-gtk-jump-to-ltr" name="to_approve" string="To Approve" domain="[('state','in',('wait','confirmed','approve1'))]" help="Purchase orders which are not approved yet."/>
+            </xpath>
+        </field>
+    </record>
+     <record model="ir.ui.view" id="purchase_triple_validation_order_form">
+         <field name="name">purchase.triple.validation.order.form</field>
+         <field name="model">purchase.order</field>
+         <field name="inherit_id" ref="purchase.purchase_order_form"/>
+         <field name="arch" type="xml">
+             <data>
+                 <xpath expr="//button[@name='purchase_approve']" position="replace">
+                                         <button name="purchase_approve_1" states="confirmed" string="Approve Order" class="oe_highlight" groups="purchase.group_purchase_manager"/>
+                    <button name="purchase_approve" states="approve1" string="Approve Order" class="oe_highlight" groups="purchase.group_purchase_manager"/>
+              </xpath>
+                  <xpath expr="//field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,bid,approve1,approved,done" statusbar_colors="{&quot;except_picking&quot;:&quot;red&quot;,&quot;except_invoice&quot;:&quot;red&quot;,&quot;confirmed&quot;:&quot;blue&quot;}" readonly="1"/>
+              </xpath>
+             </data>
+         </field>
+     </record>
+    </data>
+</openerp>
