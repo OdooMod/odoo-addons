@@ -1,9 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_stock_picking_user,tiny.stock.picking user,model_tiny_stock_picking,tiny_stock.group_stock_user,1,1,1,1
-access_stock_picking_manager,tiny.stock.picking manager,model_tiny_stock_picking,tiny_stock.group_stock_manager,1,1,1,1
-access_stock_move_manager,tiny.stock.move manager,model_tiny_stock_move,tiny_stock.group_stock_manager,1,1,1,1
-access_stock_move_user,tiny.stock.move user,model_tiny_stock_move,tiny_stock.group_stock_user,1,1,1,0
-access_stock_inventory_user,tiny.stock.inventory user,model_tiny_stock_inventory,tiny_stock.group_stock_user,1,1,1,0
-access_stock_inventory_manager,tiny.stock.inventory manager,model_tiny_stock_inventory,tiny_stock.group_stock_manager,1,1,1,1
-access_stock_inventory_line_user,tiny.stock.inventory.line user,model_tiny_stock_inventory_line,tiny_stock.group_stock_user,1,1,1,0
-access_stock_inventory_line_manager,tiny.stock.inventory.line manager,model_tiny_stock_inventory_line,tiny_stock.group_stock_manager,1,1,1,1
