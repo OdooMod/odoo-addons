@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+        <record model="ir.ui.view" id="view_picking_type_form">
+            <field name="name">Operation Types</field>
+            <field name="model">stock.picking.type</field>
+            <field name="arch" type="xml">
+                <form string="Operation Types">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="sequence_id"/>
+                                <field name="warehouse_id"/>
+                            </group>
+                            <group>
+                                <field name="code"/>
+                                <field name="return_picking_type_id"/>
+                                <field name="barcode_nomenclature_id" groups="base.group_no_one"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Packs and Lots" groups="stock.group_tracking_lot,stock.group_production_lot">
+                                <field name="show_entire_packs" groups="stock.group_tracking_lot"/>
+                                <field name="use_create_lots" groups="stock.group_production_lot"/>
+                                <field name="use_existing_lots" groups="stock.group_production_lot"/>
+                            </group>
+                            <group string="Locations">
+                                <field name="default_location_src_id" attrs="{'required': [('code', '=', 'internal')]}"/>
+                                <field name="default_location_dest_id" attrs="{'required': [('code', 'in', ('internal', 'incoming'))]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="stock_picking_type_action" model="ir.actions.act_window">
+            <field name="name">Inventory</field>
+            <field name="res_model">stock.picking.type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="view_id" ref="stock_picking_type_kanban"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new picking type.
+              </p><p>
+                The picking type system allows you to assign each stock
+                operation a specific type which will alter its views accordingly.
+                On the picking type you could e.g. specify if packing is needed by default,
+                if it should show the customer.
+              </p>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_picking_type_list">
+            <field name="name">stock.picking.type.list</field>
+            <field name="model">stock.picking.type</field>
+            <field name="arch" type="xml">
+                <tree string="Operation Types">
+                    <field name="name"/>
+                    <field name="sequence_id"/>
+                    <field name="warehouse_id"/>
+                    <field name="code"/>
+                    <field name="return_picking_type_id"/>
+                    <field name="default_location_src_id" attrs="{'required': [('code', '=', 'internal')]}"/>
+                    <field name="default_location_dest_id" attrs="{'required': [('code', 'in', ('internal', 'incoming'))]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_picking_type_list" model="ir.actions.act_window">
+            <field name="name">All Operations</field>
+            <field name="res_model">stock.picking.type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to define a new transfer.
+              </p><p>
+                    You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+              </p>
+            </field>
+
+        </record>
+
+        <menuitem
+            action="stock_picking_type_action"
+            id="stock_picking_type_menu"
+            parent="menu_stock_root" sequence="0"
+            name="Dashboard"/>
+
+        <record model="ir.ui.view" id="stock_picking_kanban">
+            <field name="name">tiny.stock.picking.kanban</field>
+            <field name="model">tiny.stock.picking</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="location_dest_id"/>
+                    <field name="state"/>
+                    <field name="date"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.name.value"/></span></strong>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span class="pull-right text-right">
+                                            <field name="state" widget="kanban_label_selection" options="{'classes': {'draft': 'default', 'cancel': 'default', 'none': 'danger', 'waiting': 'warning', 'confirmed': 'warning', 'partially_available': 'warning', 'done': 'success'}}"/>
+                                        </span></strong>
+                                    </div>
+                                </div>
+                                <div class="row text-muted">
+                                    <div class="col-xs-6">
+                                        <span><t t-esc="record.partner_id.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <span class="pull-right text-right"><t t-esc="record.date.value and record.date.value.split(' ')[0] or False"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="vpicktree" model="ir.ui.view">
+            <field name="name">tiny.stock.picking.tree</field>
+            <field name="model">tiny.stock.picking</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" decoration-danger="state not in ('cancel', 'done')" string="Picking list">
+                    <field name="name"/>
+                    <field name="location_dest_id"/>
+                    <field name="partner_id"/>
+                    <field name="date" invisible="0"/>
+                    <field name="origin"/>
+                    <field name="state"/>
+                    <field name="picking_type_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_picking_form" model="ir.ui.view">
+            <field name="name">tiny.stock.picking.form</field>
+            <field name="model">tiny.stock.picking</field>
+            <field eval="12" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Transfer">
+                <header>
+                    <button name="action_done" states="draft,cancel" string="Validate" groups="tiny_stock.group_tiny_stock_user" type="object" class="oe_highlight"/>
+                    <button name="action_cancel" states="done" string="Cancel" groups="base.group_user" type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,partially_available,assigned,done" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <h1 class="hidden-xs">
+                        <field name="name" attrs="{'invisible': [('name','=','/')]}" readonly="1"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="partner_id" attrs="{'invisible': [('picking_type_code', '=', 'internal')]}"/>
+                            <field name="location_id" groups="stock.group_stock_multi_locations" attrs="{'invisible': [('picking_type_code', '=', 'outgoing')]}"/>
+                            <field name="location_dest_id" groups="stock.group_stock_multi_locations" attrs="{'invisible': [('picking_type_code', '=', 'incoming')]}"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="origin" placeholder="e.g. PO0032" class="oe_inline"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Initial Demand">
+                            <field name="move_lines" attrs="{'readonly': [('state', 'in', ('done'))]}" options="{'reload_on_button': True}" mode="tree,kanban" context="{'address_in_id': partner_id, 'form_view_ref':'tiny_stock.view_move_picking_form', 'tree_view_ref':'tiny_stock.view_move_picking_tree', 'default_picking_type_id': picking_type_id, 'default_location_id': location_id, 'default_location_dest_id': location_dest_id}">
+                                    <kanban class="o_kanban_mobile">
+                                    <field name="product_id"/>
+                                    <field name="product_uom_qty"/>
+                                    <field name="product_uom" options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="location_dest_id"/>
+                                    <field name="state"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <strong><span><t t-esc="record.product_id.value"/></span></strong>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-8 text-muted">
+                                                        <span><t t-esc="record.availability.value"/> on <t t-esc="record.product_uom_qty.value"/> <t t-esc="record.product_uom.value"/></span>
+                                                    </div>
+                                                    <div class="col-xs-4 text-muted">
+                                                        <span class="pull-right text-right"><t t-esc="record.location_dest_id.value"/></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                            <field name="note" placeholder="Add an internal note that will be printed on the Picking Operations sheet" class="oe_inline"/>
+                        </page>
+                        <page string="Additional Info" name="extra">
+                            <group>
+                                <group>
+                                    <field name="picking_type_id"/>
+                                    <field name="picking_type_code" invisible="1"/>
+                                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_picking_internal_search" model="ir.ui.view">
+            <field name="name">tiny.stock.picking.internal.search</field>
+            <field name="model">tiny.stock.picking</field>
+            <field name="arch" type="xml">
+                <search string="Picking Lists">
+                    <field name="name" string="Picking List" filter_domain="['|',('name','ilike', self),('origin','ilike',self)]"/>
+                    <filter name="draft" string="Draft" domain="[('state','=','draft')]" help="Draft Moves"/>
+                    <filter name="done" string="Done" domain="[('state','=','done')]" help="Pickings already processed"/>
+                    <separator/>
+                    <field name="partner_id" filter_domain="[('partner_id','child_of',self)]"/>
+                    <field name="product_id"/>
+                    <field name="picking_type_id"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
+                        <filter string="Order Date" domain="[]"  context="{'group_by':'date'}"/>
+                        <filter string="Origin" domain="[]" context="{'group_by':'origin'}"/>
+                        <filter name="picking_type" string="Picking Type" domain="[]" context="{'group_by':'picking_type_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_picking_tree_all" model="ir.actions.act_window">
+            <field name="name">Stock Operations</field>
+            <field name="res_model">tiny.stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain"></field>
+            <field name="context">{
+                    'contact_display': 'partner_address',
+            }
+            </field>
+            <field name="search_view_id" ref="view_picking_internal_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create a new transfer.
+              </p><p>
+                You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="all_picking" name="All Transfers" parent="menu_stock_warehouse_mgmt" sequence="2" action="action_picking_tree_all" groups="group_stock_manager,group_stock_user"/>
+
+        <record id="stock_picking_action_picking_type" model="ir.actions.act_window">
+            <field name="name">All Transfers</field>
+            <field name="res_model">tiny.stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain"></field>
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+                    'contact_display': 'partner_address',
+            }
+            </field>
+            <field name="search_view_id" ref="view_picking_internal_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create a new transfer.
+              </p><p>
+                You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+              </p>
+            </field>
+        </record>
+
+        <record id="action_picking_tree_done" model="ir.actions.act_window">
+            <field name="name">Done Transfers</field>
+            <field name="res_model">tiny.stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain"></field>
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+                    'contact_display': 'partner_address',
+                    'search_default_done': 1,
+            }
+            </field>
+            <field name="search_view_id" ref="view_picking_internal_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create a new transfer.
+              </p><p>
+                You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+              </p>
+            </field>
+        </record>
+
+        <record id="action_picking_tree_ready" model="ir.actions.act_window">
+            <field name="name">To Do</field>
+            <field name="res_model">tiny.stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain"></field>
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+                    'contact_display': 'partner_address',
+                    'search_default_available': 1,
+            }
+            </field>
+            <field name="search_view_id" ref="view_picking_internal_search"/>
+             <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create a new transfer.
+              </p><p>
+                You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+              </p>
+            </field>
+       </record>
+
+        <record id="action_picking_tree_done_grouped" model="ir.actions.act_window">
+            <field name="name">Done Transfers by Date</field>
+            <field name="res_model">tiny.stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain"></field>
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+                    'contact_display': 'partner_address',
+                    'search_default_done': 1,
+                    'group_by': ['date'],
+            }
+            </field>
+            <field name="search_view_id" ref="view_picking_internal_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create a new transfer.
+              </p><p>
+                You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+              </p>
+            </field>
+        </record>
+
+        <record id="action_picking_tree_waiting" model="ir.actions.act_window">
+            <field name="name">Waiting Transfers</field>
+            <field name="res_model">tiny.stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain"></field>
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+                    'contact_display': 'partner_address',
+                    'search_default_waiting': 1,
+            }
+            </field>
+            <field name="search_view_id" ref="view_picking_internal_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create a new transfer.
+              </p><p>
+                You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+              </p>
+            </field>
+        </record>
+
+        <record id="action_picking_tree_late" model="ir.actions.act_window">
+            <field name="name">Late Transfers</field>
+            <field name="res_model">tiny.stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain"></field>
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+                    'contact_display': 'partner_address',
+                    'search_default_late': 1,
+                    'search_default_confirmed': 1,
+            }
+            </field>
+            <field name="search_view_id" ref="view_picking_internal_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create a new transfer.
+              </p><p>
+                You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+              </p>
+            </field>
+        </record>
+
+        <record id="action_picking_tree_backorder" model="ir.actions.act_window">
+            <field name="name">Backorders</field>
+            <field name="res_model">tiny.stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain"></field>
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+                    'contact_display': 'partner_address',
+                    'search_default_backorder': 1,
+                    'search_default_confirmed': 1,
+            }
+            </field>
+            <field name="search_view_id" ref="view_picking_internal_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create a new transfer.
+              </p><p>
+                You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+              </p>
+            </field>
+        </record>
+
+        <record id="action_picking_tree" model="ir.actions.act_window">
+            <field name="name">Transfers</field>
+            <field name="res_model">tiny.stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain"></field>
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+                    'contact_display': 'partner_address',
+            }
+            </field>
+            <field name="search_view_id" ref="view_picking_internal_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a stock operation.
+              </p><p>
+                Most operations are prepared automatically by Odoo according
+                to your preconfigured logistics rules, but you can also record
+                manual stock movements.
+              </p>
+            </field>
+        </record>
+
+
+        <record id="action_picking_form" model="ir.actions.act_window">
+            <field name="name">New Transfer</field>
+            <field name="res_model">tiny.stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="domain"></field>
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+                    'contact_display': 'partner_address',
+            }
+            </field>
+            <field name="search_view_id" ref="view_picking_internal_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create a new transfer.
+              </p><p>
+                You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+              </p>
+            </field>
+        </record>
+        <record id="do_view_pickings" model="ir.actions.act_window">
+            <field name="name">Pickings for Groups</field>
+            <field name="res_model">tiny.stock.picking</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('group_id','=',active_id)]</field>
+        </record>
+
+		<record id="stock_picking_type_kanban" model="ir.ui.view">
+            <field name="name">stock.picking.type.kanban</field>
+            <field name="model">stock.picking.type</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey o_kanban_dashboard o_stock_kanban" create="0">
+                    <field name="color"/>
+                    <field name="code"/>
+                    <field name="count_tiny_picking_draft"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-if="['incoming', 'outgoing', 'internal'].indexOf(record.code.raw_value) > -1" name="stock_picking">
+                                <div t-attf-class="#{kanban_color(record.color.raw_value)}">
+                                    <div class="o_kanban_card_header">
+                                        <div class="o_kanban_card_header_title">
+                                            <div class="o_primary">
+                                                <a type="object" name="get_tiny_stock_picking_action_picking_type">
+                                                    <field name="name"/>
+                                                </a>
+                                            </div>
+                                            <div class="o_secondary"><field class="o_secondary"  name="warehouse_id"/></div>
+                                        </div>
+                                    </div>
+                                    <div class="container o_kanban_card_content o_visible">
+                                        <div class="row">
+                                            <div class="col-xs-6 o_kanban_primary_left">
+                                                <button class="btn btn-primary" name="get_action_tiny_picking_tree_ready" type="object">
+                                                    <span t-if="record.code.raw_value =='incoming'"><t t-esc="record.count_tiny_picking_draft.value"/> To Receive</span>
+                                                    <span t-if="record.code.raw_value =='outgoing'"><t t-esc="record.count_tiny_picking_draft.value"/> To Do</span>
+                                                    <span t-if="record.code.raw_value =='internal'"><t t-esc="record.count_tiny_picking_draft.value"/> Transfers</span>
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-6 o_kanban_primary_right">
+                                                <div t-if="record.count_tiny_picking_draft.raw_value > 0" class="row">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+		
+</odoo>
