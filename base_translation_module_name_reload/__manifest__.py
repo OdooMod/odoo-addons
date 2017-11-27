@@ -6,7 +6,7 @@
     'name': 'Base Translation Module Name Reload',
     "summary": "Base Translation Module Name Reload",
     "version": "1.0",
-    "category": "Base",
+    "category": "Localization",
     "website": "http://www.odoomod.com/",
     'description': """
 Base Translation Module Name Reload
