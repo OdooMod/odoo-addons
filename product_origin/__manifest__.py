@@ -6,7 +6,7 @@
     'name': 'Product Origin',
     "summary": "Product Origin",
     "version": "1.0",
-    "category": "Purchases",
+    "category": "Sales",
     "website": "http://www.odoomod.com/",
     'description': """
 Product Origin
