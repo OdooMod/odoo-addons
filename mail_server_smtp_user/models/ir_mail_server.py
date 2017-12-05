@@ -7,7 +7,7 @@ from odoo import api, models, tools
 
 
 class IrMailServer(models.Model):
-    _name = "ir.mail_server"
+    _inherit = "ir.mail_server"
 
     @api.model
     def send_email(self, message, mail_server_id=None, smtp_server=None, smtp_port=None,
