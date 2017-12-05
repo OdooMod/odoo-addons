@@ -1,0 +1,31 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_origin
+#
+# Translators:
+# Jarvis <jarvis@odoomod.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0-20171007\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-05 23:17+0000\n"
+"PO-Revision-Date: 2017-12-05 23:17+0000\n"
+"Last-Translator: <jarvis@odoomod.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+
+#. module: base
+#: model:ir.module.module,shortdesc:base.product_origin
+msgid "Product Origin"
+msgstr "产品原产国"
+
+
+#. module: product_origin
+#: model:ir.model.fields,field_description:product_origin.field_product_product_country_id
+#: model:ir.model.fields,field_description:product_origin.field_product_template_country_id
+msgid "Country of origin"
+msgstr "原产国"
