@@ -6,7 +6,7 @@
 {
     "name": "Web PDF Report Preview & Print",
     'version': '1.0',
-    'category': 'Web',
+    'category': 'Hidden',
     'description': """Web PDF Report Preview & Print
 
 Preview & Print PDF report in your browser.
