@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_mes_root"
+        name="MES"
+        groups="mrp.group_mrp_user,mrp.group_mrp_manager"
+        icon="fa-wrench"
+        web_icon="mrp,static/description/icon.png"
+        sequence="36"/>
+
+    <menuitem id="menu_mes_configuration"
+        name="Configuration"
+        parent="menu_mes_root"
+        groups="mrp.group_mrp_manager"
+        sequence="100"/>
+
+    <menuitem id="menu_mes_resources_config"
+        name="Resources"
+        parent="menu_mes_configuration"
+        sequence="100"/>
+
+</odoo>

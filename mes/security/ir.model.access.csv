@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mes_device,mes.device,model_mes_device,mrp.group_mrp_user,1,0,0,0
+access_mes_device_manager,mes.device.manager,model_mes_device,mrp.group_mrp_manager,1,1,1,1
+access_mes_item,mes.item,model_mes_item,mrp.group_mrp_user,1,0,0,0
+access_mes_item_manager,mes.item.manager,model_mes_item,mrp.group_mrp_manager,1,1,1,1
+access_mes_channel,mes.channel,model_mes_channel,mrp.group_mrp_user,1,0,0,0
+access_mes_channel_manager,mes.channel.manager,model_mes_channel,mrp.group_mrp_manager,1,1,1,1

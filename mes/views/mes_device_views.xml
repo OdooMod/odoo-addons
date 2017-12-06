@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_device_filter" model="ir.ui.view">
+        <field name="name">mes.device.filter</field>
+        <field name="model">mes.device</field>
+        <field name="arch" type="xml">
+            <search string="Search Device">
+                <field name="name"/>
+            </search>
+
+        </field>
+    </record>
+
+    <record id="view_device_tree" model="ir.ui.view">
+        <field name="name">mes.device.tree</field>
+        <field name="model">mes.device</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_device_form" model="ir.ui.view">
+        <field name="name">mes.device.form</field>
+        <field name="model">mes.device</field>
+        <field name="arch" type="xml">
+            <form string="Device">
+            <sheet>
+                <div class="oe_button_box" name="button_box">
+
+                </div>
+                <div class="oe_title">
+                    <label for="name" class="oe_edit_only"/>
+                    <h1><field name="name"/></h1>
+                </div>
+                <separator string="Items"/>
+                <field name="item_ids">
+                    <tree editable="bottom">
+                        <field name="name"/>
+                    </tree>
+                </field>
+            </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_device_form" model="ir.actions.act_window">
+        <field name="name">Device</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mes.device</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="view_device_tree"/>
+        <field name="search_view_id" ref="view_device_filter"/>
+    </record>
+
+
+    <menuitem action="action_device_form" id="menu_action_device_form" parent="menu_mes_resources_config" sequence="20"/>
+</odoo>

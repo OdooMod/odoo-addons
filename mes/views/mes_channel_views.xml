@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_channel_filter" model="ir.ui.view">
+        <field name="name">mes.channel.filter</field>
+        <field name="model">mes.channel</field>
+        <field name="arch" type="xml">
+            <search string="Search Channel">
+                <field name="name"/>
+                <field name="protocol"/>
+            </search>
+
+        </field>
+    </record>
+
+    <record id="view_channel_tree" model="ir.ui.view">
+        <field name="name">mes.channel.tree</field>
+        <field name="model">mes.channel</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="protocol"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_channel_form" model="ir.ui.view">
+        <field name="name">mes.channel.form</field>
+        <field name="model">mes.channel</field>
+        <field name="arch" type="xml">
+            <form string="Channel">
+            <sheet>
+                <div class="oe_button_box" name="button_box">
+
+                </div>
+                <div class="oe_title">
+                    <label for="name" class="oe_edit_only"/>
+                    <h1><field name="name"/></h1>
+                </div>
+                <group>
+                    <group>
+                        <field name="protocol"/>
+                    </group>
+                </group>
+                <separator string="Items"/>
+                <field name="item_ids">
+                    <tree editable="bottom">
+                        <field name="name"/>
+                    </tree>
+                </field>
+            </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_channel_form" model="ir.actions.act_window">
+        <field name="name">Channel</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mes.channel</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="view_channel_tree"/>
+        <field name="search_view_id" ref="view_channel_filter"/>
+    </record>
+
+
+    <menuitem action="action_channel_form" id="menu_action_channel_form" parent="menu_mes_resources_config" sequence="10"/>
+</odoo>
