@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_item_filter" model="ir.ui.view">
+        <field name="name">mes.item.filter</field>
+        <field name="model">mes.item</field>
+        <field name="arch" type="xml">
+            <search string="Search Item">
+                <field name="name"/>
+                <field name="device_id"/>
+                <field name="channel_id"/>
+            </search>
+
+        </field>
+    </record>
+
+    <record id="view_item_tree" model="ir.ui.view">
+        <field name="name">mes.item.tree</field>
+        <field name="model">mes.item</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="device_id"/>
+                <field name="channel_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_item_form" model="ir.ui.view">
+        <field name="name">mes.item.form</field>
+        <field name="model">mes.item</field>
+        <field name="arch" type="xml">
+            <form string="Item">
+            <sheet>
+                <div class="oe_button_box" name="button_box">
+
+                </div>
+                <div class="oe_title">
+                    <label for="name" class="oe_edit_only"/>
+                    <h1><field name="name"/></h1>
+                </div>
+                <group>
+                    <group>
+                        <field name="device_id"/>
+                    </group>
+                    <group>
+                        <field name="channel_id"/>
+                    </group>
+                </group>
+            </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_item_form" model="ir.actions.act_window">
+        <field name="name">Item</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mes.item</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="view_item_tree"/>
+        <field name="search_view_id" ref="view_item_filter"/>
+    </record>
+
+
+    <menuitem action="action_item_form" id="menu_action_item_form" parent="menu_mes_resources_config" sequence="30"/>
+</odoo>
