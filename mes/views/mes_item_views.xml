@@ -62,5 +62,5 @@
     </record>
 
 
-    <menuitem action="action_item_form" id="menu_action_item_form" parent="menu_mes_resources_config" sequence="30"/>
+    <menuitem action="action_item_form" id="menu_action_item_form" parent="menu_mes_resources_config" sequence="20"/>
 </odoo>

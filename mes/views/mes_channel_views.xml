@@ -37,9 +37,25 @@
                     <label for="name" class="oe_edit_only"/>
                     <h1><field name="name"/></h1>
                 </div>
-                <group>
+                <group string="General information">
                     <group>
                         <field name="protocol"/>
+                    </group>
+                </group>
+                <group string="Serial definition" colspan="4"
+                       attrs="{'invisible': [('protocol', 'not in', ['modbus',None])]}" >
+                    <group>
+                        <field name="serial_port"
+                           attrs="{'required': [('protocol', 'in', ['modbus'])]}" />
+                        <field name="serial_buad_rate"
+                           attrs="{'required': [('protocol', 'in', ['modbus'])]}" />
+                    </group>
+                </group>
+                <group string="OPC definition" colspan="4"
+                       attrs="{'invisible': [('protocol', 'not in', ['opc',None])]}" >
+                    <group>
+                        <field name="opc_prog_id"
+                           attrs="{'required': [('protocol', 'in', ['opc'])]}" />
                     </group>
                 </group>
                 <separator string="Items"/>

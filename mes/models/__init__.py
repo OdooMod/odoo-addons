@@ -2,4 +2,4 @@
 # Copyright 2017 Jarvis (www.odoomod.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from . import mes
+from . import mes_channel, mes_item, mes_device
