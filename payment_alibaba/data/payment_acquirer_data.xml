@@ -4,7 +4,7 @@
 
         <record  id = "payment.payment_acquirer_alipay" model="payment.acquirer">
             <field name="name">Alipay</field>
-            <field name="image" type="base64" file="payment_alipay/static/src/img/alipay_logo.png"/>
+            <field name="image" type="base64" file="payment_zhifubao/static/src/img/alipay_logo.png"/>
             <field name="provider">alipay</field>
             <field name="company_id" ref="base.main_company"/>
             <field name="view_template_id" ref="alipay_acquirer_button"/>

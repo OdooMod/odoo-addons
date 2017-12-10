@@ -17,7 +17,7 @@ except:
     pass
 
 from base64 import b64decode
-from odoo.addons.payment_alipay.models import func
+from ..models import func
 
 _logger = logging.getLogger(__name__)
 
