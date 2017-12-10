@@ -1,0 +1,3 @@
+[submodule "payment_alipay"]
+	path = payment_alipay
+	url = https://github.com/OdooMod/payment_alipay
