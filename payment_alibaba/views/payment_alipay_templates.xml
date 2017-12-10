@@ -23,7 +23,7 @@
                 <!-- submit -->
                 <button type="submit" width="100px"
                     t-att-class="submit_class">
-                    <img t-if="not submit_txt" src="/payment_zhifubao/static/src/img/alipay_logo.png"/>
+                    <img t-if="not submit_txt" src="/payment_alibaba/static/src/img/alipay_logo.png"/>
                     <span t-if="submit_txt"><t t-esc="submit_txt"/> <span class="fa fa-long-arrow-right"/></span>
                 </button>
             </form>
