@@ -1,0 +1,25 @@
+<odoo>
+  <data>
+    <record id="hq_login_view" model="ir.ui.view">
+        <field name="name">hq_login.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <field name="login" position="after">
+                    <label for="mobile" class="oe_edit_only" string="mobile phone"/>
+                    <h2><field name="phone_number"/></h2>
+                    <label for="loginwithpw" class="oe_edit_only" string="login with password"/>
+                    <h2><field name="loginwithpw"/></h2>
+            </field>
+            <xpath expr="//sheet/notebook/page[2]" position="after">
+                <page string="所在团队">
+                    <field name="team_ids"></field>
+                </page>
+                <page string="所在仓库">
+                    <field name="warehouse_ids"></field>
+                </page>
+            </xpath>
+        </field>
+        </record>
+  </data>
+</odoo>
