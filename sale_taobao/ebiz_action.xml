@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data >
+        <!--电商店铺action -->
+        <record model="ir.actions.act_window" id="oscg_action_ebiz_shop">
+            <field name="name">电商店铺</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ebiz.shop</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="oscg_ebiz_shop_search"/>
+            <field name="view_id" ref="oscg_ebiz_shop_tree"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="oscg_action_stock_sync">
+            <field name="name">库存同步</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ebiz.stock</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="oscg_stock_sync_search"/>
+            <field name="view_id" ref="oscg_stock_sync_tree"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="oscg_action_ebiz_syncerr">
+            <field name="name">同步异常</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ebiz.syncerr</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="oscg_ebiz_syncerr_search"/>
+            <field name="view_id" ref="oscg_ebiz_syncerr_tree"/>
+        </record>
+
+        <menuitem id="menu_oscg_web_shop" name="电商订单同步" parent="base.menu_base_partner" sequence="5"/>
+        <menuitem id="menu_ebiz_shop" parent="menu_oscg_web_shop" name='电商店铺'  action="oscg_action_ebiz_shop" sequence="1"/>
+        <menuitem id="menu_product_sku" parent="menu_oscg_web_shop" name='商品/SKU匹配'  action="oscg_action_product_sku" sequence="5"/>
+        <menuitem id="menu_check_order" parent="menu_oscg_web_shop" name='订单导入'  action="oscg_action_check_order" sequence="10"/>
+        <menuitem id="menu_stock_sync" parent="menu_oscg_web_shop" name='库存同步'  action="oscg_action_stock_sync" sequence="20"/>
+        <menuitem id="menu_ebiz_syncerr" parent="menu_oscg_web_shop" name='同步异常'  action="oscg_action_ebiz_syncerr" sequence="30"/>
+    </data>
+</openerp>

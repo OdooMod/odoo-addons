@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+     <record id="view_ebiz_delivery_sync_wizard_form" model ="ir.ui.view">
+        <field name="name">运单同步</field>
+        <field name="model">ebiz.delivery.sync.wizard</field>
+        <field name="arch" type="xml">
+            <form string="运单同步">
+                    <separator string="所选订单运单号将同步到电商店铺！" colspan="4"/>
+                        <label string="
+1) 系统自动从订单对应的发货单上读取运单号、快递方式、快递公司，更新到电商网站上。 &#10;
+2) 如果是合并订单，系统从订单的源单据字段取得合并前的订单号，同时更新合并前订单的发货信息。 &#10;
+3) 如果更新失败，系统记录失败信息到同步异常表 &#10;
+" colspan="4"/>
+                    <separator string="" colspan="4" />
+                    <button name="delivery_sync" string="运单同步" type="object" icon="gtk-convert"/>	        
+                    <button special="cancel" string="取消" icon="gtk-cancel"/>
+            </form>
+        </field>
+     </record>       
+        <act_window name="运单同步"
+            id="action_ebiz_delivery_sync_wizard"
+            src_model="sale.order"
+            res_model="ebiz.delivery.sync.wizard"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi" 
+            view_id="view_ebiz_delivery_sync_wizard_form"/>
+
+
+     <record id="view_ebiz_signed_sync_wizard_form" model ="ir.ui.view">
+        <field name="name">买家签收检查</field>
+        <field name="model">ebiz.signed.sync.wizard</field>
+        <field name="arch" type="xml">
+            <form string="买家签收检查">
+                    <separator string="检查订单签收状态，自动开票并确认" colspan="4"/>
+                        <label string="
+1) 系统筛选已发货、尚未开票的订单，自动获取订单状态。 &#10;
+2) 如果订单‘买家已签收’，则系统自动开票、并确认发票，产生应收账款。 &#10;
+3) 如果更新失败，系统记录失败信息到同步异常表 &#10;
+" colspan="4"/>
+                    <separator string="" colspan="4" />
+                    <button name="signed_sync" string="买家签收检查" type="object" icon="gtk-convert"/>	        
+                    <button special="cancel" string="取消" icon="gtk-cancel"/>
+            </form>
+        </field>
+     </record>       
+        <act_window name="买家签收检查"
+            id="action_ebiz_signed_sync_wizard"
+            src_model="sale.order"
+            res_model="ebiz.signed.sync.wizard"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi" 
+            view_id="view_ebiz_signed_sync_wizard_form"/>
+
+</data>
+</openerp>
+

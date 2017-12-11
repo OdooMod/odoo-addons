@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="oscg_ebiz_check_order_form" model="ir.ui.view">
+            <field name="name">ebiz.check.order.wizard</field>
+            <field name="model">ebiz.check.order.wizard</field>
+            <field name="arch" type="xml">
+                <form string="订单导入" >
+                    <group>
+                        <group>
+                            <field name="shop_id"/>
+                            <field name="date_start"/>
+                        </group>
+                        <group>
+                            <field name="order_state"/>
+                            <field name="date_end"/>
+                        </group>
+                        <group>
+                            <button name="search_import_sale_order" string="订单批量导入" type="object"/>
+                            <button name="check_sale_order" string="漏单检查" type="object"/>
+                        </group>
+                    </group>
+                    <field name="order_line"/>
+                    <footer class="oe_right">
+                        <button name="import_sale_order" string="订单导入" type="object" icon="gtk-ok"/>
+                        or
+                        <button string="关闭" icon="gtk-cancel" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="ebiz_check_order_line_wizard_tree">
+            <field name="name">漏单</field>
+            <field name="model">ebiz.check.order.line.wizard</field>
+            <field name="arch" type="xml">
+                <tree string="Check Order Line" editable="bottom" edit="false" create="false" delete="true">
+                    <field name="sale_code"/>
+                    <field name="buyer_nick"/>
+                    <field name="amount"/>                  
+                    <field name="date_create"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="oscg_action_check_order" model="ir.actions.act_window">
+            <field name="name">漏单检查</field>
+            <field name="res_model">ebiz.check.order.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="oscg_ebiz_check_order_form"/>
+            <field name="target">current</field>
+            <field name="context">{}</field>
+        </record>
+
+    </data>
+</openerp>
+

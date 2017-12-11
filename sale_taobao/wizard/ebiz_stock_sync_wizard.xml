@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+     <record id="view_ebiz_stock_sync_wizard_form" model ="ir.ui.view">
+        <field name="name">电商库存同步</field>
+        <field name="model">ebiz.stock.sync.wizard</field>
+        <field name="arch" type="xml">
+            <form string="库存同步">
+                    <separator string='点击按钮"库存同步"同步库存到电商店铺！' colspan="4"/>
+                        <label string="
+1) 系统自动取得商品的当前可用库存（注意不是实际库存）更新到对应网店 &#10;
+2) 更新成功，系统记录更新时间和库存，并设置要否同步成不要同步 &#10;
+3) 如果更新失败，系统记录失败信息到同步异常表 &#10;
+" colspan="4"/>
+                    <separator string="" colspan="4" />
+                    <button name="ebiz_stock_sync_wizard" string="库存同步" type="object" icon="gtk-convert"/>
+                    <button special="cancel" string="取消" icon="gtk-cancel"/>
+            </form>
+        </field>
+     </record>
+     
+        <act_window name="库存同步"
+            id="action_ebiz_stock_sync_wizard"
+            src_model="ebiz.stock"
+            res_model="ebiz.stock.sync.wizard"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi" 
+            view_id="view_ebiz_stock_sync_wizard_form"/>
+
+</data>
+</openerp>
+

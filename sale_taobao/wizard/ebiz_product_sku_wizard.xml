@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="oscg_ebiz_product_sku_form" model="ir.ui.view">
+            <field name="name">ebiz.product.sku.wizard</field>
+            <field name="model">ebiz.product.sku.wizard</field>
+            <field name="arch" type="xml">
+                <form string="商品/SKU匹配" version="7.0">
+                    <group>
+                        <group>
+                            <field name="shop_id"/>
+                            <field name="date_start"/>
+                        </group>
+                        <group>
+                            <field name="name"/>
+                            <field name="date_end"/>
+                        </group>
+                        <group>                        
+                            <button name="search_product_sku" string="商品搜索" type="object"/>
+                        </group>
+                    </group>
+                    <field name="product_ids"/>
+                    <footer class="oe_right">
+                        <button name="import_product" string="导入产品" type="object" icon="gtk-ok"/>
+                        or
+                        <button string="关闭" icon="gtk-cancel" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="ebiz_product_sku_line_wizard_tree">
+            <field name="name">商品明细</field>
+            <field name="model">ebiz.product.sku.line.wizard</field>
+            <field name="arch" type="xml">
+                <tree string="Check Order Line" editable="bottom" create="false" edit="false" delete="true">
+                    <field name="name"/>
+                    <field name="out_code"/>
+                    <field name="num_code"/>
+                    <field name="date_modified"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="oscg_action_product_sku" model="ir.actions.act_window">
+            <field name="name">商品/SKU匹配</field>
+            <field name="res_model">ebiz.product.sku.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="oscg_ebiz_product_sku_form"/>
+            <field name="target">current</field>
+            <field name="context">{}</field>
+        </record>
+
+    </data>
+</openerp>
+

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- 电商店铺 -->
+        <record model="ir.ui.view" id="oscg_ebiz_shop_tree">
+            <field name="name">电商店铺</field>
+            <field name="model">ebiz.shop</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="电商店铺">
+                    <field name="name"/>
+                    <field name="platform"/>
+                    <field name="warehouse_id"/>
+                    <field name="gift_product_id"/> 
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="oscg_ebiz_shop_form">
+            <field name="name">电商店铺</field>
+            <field name="model">ebiz.shop</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="电商店铺">
+                    <h1>
+                        <label string="店铺名称:" />
+                        <field name="name" class="oe_inline"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="code" />
+                            <field name="categ_id" />
+                            <field name="post_product_id"/>
+                            <field name="gift_product_id"/>
+                        </group>  
+                        <group>
+                            <field name="platform"/>
+                            <field name="warehouse_id"/>
+                            <field name="coupon_product_id"/>
+                            <field name="journal_id"/>
+                        </group>  
+                    </group>
+                    <group string = "API">
+                        <group>
+                            <field name="appkey"/>
+                            <field name="appsecret"/>
+                            <field name="sessionkey"/>
+                        </group>  
+                        <group>
+                            <field name="apiurl"/>
+                            <field name="authurl"/>
+                            <field name="tokenurl"/>
+                        </group>  
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="oscg_ebiz_shop_search" model="ir.ui.view">
+            <field name="name">Search</field>
+            <field name="model">ebiz.shop</field>
+            <field name="arch" type="xml">
+                <search string="搜索">
+                    <field name="name" string="店铺名称" filter_domain="[('name','ilike',self)]"/>
+                    <field name="code" string="店铺前缀" filter_domain="[('code','ilike',self)]"/>
+                    <group expand="0" string="Group By..." colspan="16">
+                        <filter string="店铺前缀" domain="[]" context="{'group_by':'code'}"/>
+                        <filter string="电商平台" domain="[]" context="{'group_by':'platform'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- 库存同步 -->
+        <record model="ir.ui.view" id="oscg_stock_sync_tree">
+            <field name="name">库存同步</field>
+            <field name="model">ebiz.stock</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="库存同步">
+                    <field name="shop_id"/>
+                    <field name="location_id"/>
+                    <field name="product_id"/> 
+                    <field name="sync_date"/>
+                    <field name="sync_qty"/>
+                    <field name="sync_check"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="oscg_stock_sync_form">
+            <field name="name">库存同步</field>
+            <field name="model">ebiz.stock</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="库存同步">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="shop_id"/>
+                                <field name="location_id"/>
+                                <field name="product_id"/>
+                            </group>  
+                            <group>
+                                <field name="sync_date"/>
+                                <field name="sync_qty"/>
+                                <field name="sync_check"/>
+                            </group>  
+                        </group>
+                    </sheet> 
+                </form>
+            </field>
+        </record>
+
+        <record id="oscg_stock_sync_search" model="ir.ui.view">
+            <field name="name">Search</field>
+            <field name="model">ebiz.stock</field>
+            <field name="arch" type="xml">
+                <search string="搜索">
+                    <field name="shop_id" string="店铺"/>
+                    <field name="location_id" string="店铺库位"/>
+                    <field name="product_id" string="产品"/>
+                    <group expand="0" string="Group By..." colspan="16">
+                        <filter string="店铺" domain="[]" context="{'group_by':'shop_id'}"/>
+                        <filter string="店铺库位" domain="[]" context="{'group_by':'location_id'}"/>
+                        <filter string="产品" domain="[]" context="{'group_by':'product_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- 同步异常 -->
+        <record model="ir.ui.view" id="oscg_ebiz_syncerr_tree">
+            <field name="name">同步异常</field>
+            <field name="model">ebiz.syncerr</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="同步异常">
+                    <field name="create_date"/>
+                    <field name="shop_id"/>
+                    <field name="type"/> 
+                    <field name="name"/>
+                    <field name="state"/>
+                    <button name="action_done" states="draft" string="解决" type="object"  icon="gtk-go-forward"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="oscg_ebiz_syncerr_form">
+            <field name="name">同步异常</field>
+            <field name="model">ebiz.syncerr</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="同步异常">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="create_date"/>
+                                <field name="type"/>
+                            </group>  
+                            <group>
+                                <field name="shop_id"/>
+                                <field name="name"/>
+                            </group>  
+                        </group>
+                    </sheet> 
+                </form>
+            </field>
+        </record>
+
+        <record id="oscg_ebiz_syncerr_search" model="ir.ui.view">
+            <field name="name">Search</field>
+            <field name="model">ebiz.syncerr</field>
+            <field name="arch" type="xml">
+                <search string="搜索">
+                    <field name="name" string="错误描述"/>
+                    <field name="shop_id" string="店铺" filter_domain="[('name','ilike',self)]"/>
+                    <group expand="0" string="Group By..." colspan="16">
+                        <filter string="店铺" domain="[]" context="{'group_by':'shop_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="oscg_ebiz_shop_template_form" model="ir.ui.view">
+            <field name="name">oscg.ebiz.shop.template</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='default_code']"  position="after">
+                        <field name="num_iid"/>
+                    </xpath>
+                </data>
+            </field>        
+        </record>
+
+        <!-- SO-->
+        <record id="oscg_ebiz_shop_sales_form" model="ir.ui.view">
+            <field name="name">oscg.ebiz.shop.sales</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='partner_shipping_id']"  position="after">
+                        <field name="buyer_memo"/>
+                    </xpath>
+                    <xpath expr="//field[@name='currency_id']"  position="after">
+                        <field name="seller_memo"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!--订单合并 -->
+
+       <record id="ebiz_shop_sales_merge_view_tree" model="ir.ui.view">
+            <field name="name">ebiz.shop.sales.merge.view.tree</field>
+            <field name="model">sale.order</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Sales Orders" colors="grey:state=='cancel';blue:state in ('waiting_date','manual');red:state in ('invoice_except','shipping_except')">
+                    <field name="message_unread" invisible="1"/>
+                    <field name="name" string="Order Number"/>
+                    <field name="date_order"/>
+                    <field name="partner_id"/>
+                    <field name="partner_shipping_id"/>
+                    <field name="user_id"/>
+                    <field name="amount_total" sum="Total Tax Included"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_ebiz_shop_sales_merge" model="ir.actions.act_window">
+            <field name="name">订单合并</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="ebiz_shop_sales_merge_view_tree"/>
+            <field name="domain">[('state','&lt;&gt;','cancel'),('state','&lt;&gt;','done'),('shipped','=',False),('invoiced','=',False)]</field>
+            <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+            <field name="context">{"tb_so_merge":True,"search_default_date_order":datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S')}</field>
+        </record>
+
+        <menuitem action="action_ebiz_shop_sales_merge" id="menu_ebiz_shop_sales_merge" parent="base.menu_sales" sequence="6" name="订单合并" />
+
+        <!--支付宝对账单 -->
+        <record id="oscg_ebiz_shop_account_bank_form" model="ir.ui.view">
+            <field name="name">oscg.ebiz.shop.account.bank</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='name']"  position="before">
+                        <button class="oe_inline oe_stat_button" name="%(ebiz_cn.action_ebiz_shop_account)d" string="导入支付宝账单" type="action" attrs="{'invisible':[('state','=','confirm')]}" widget="statinfo" icon="fa-pencil-square-o"/>
+                    </xpath>
+                </data>
+            </field>        
+        </record>
+
+
+    </data>
+</openerp>

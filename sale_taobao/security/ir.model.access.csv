@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ebiz_shop,ebiz.shop,model_ebiz_shop,base.group_user,1,0,0,0
+access_ebiz_shop_manager,ebiz.shop.manager,model_ebiz_shop,base.group_sale_manager,1,1,1,1
+access_ebiz_stock_manager,ebiz.stock.manager,model_ebiz_stock,base.group_sale_manager,1,1,1,1
+access_ebiz_syncerr,ebiz.syncerr,model_ebiz_syncerr,base.group_user,1,1,1,1
+access_ebiz_stock_user,ebiz.stock.user,model_ebiz_stock,stock.group_stock_user,1,1,1,0

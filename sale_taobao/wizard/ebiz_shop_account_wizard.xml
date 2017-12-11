@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="oscg_ebiz_shop_account_form" model="ir.ui.view">
+            <field name="name">ebiz.shop.account.wizard</field>
+            <field name="model">ebiz.shop.account.wizard</field>
+            <field name="arch" type="xml">
+                <form string="导入支付宝对账单" version="7.0">
+                    <group>
+                        <group>
+                            <field name="shop_id"/>
+                        </group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                        </group>
+                    </group>
+                    <footer class="oe_right">
+                        <button name="import_lines" string="订单导入" type="object" icon="gtk-ok"/>
+                        or
+                        <button string="关闭" icon="gtk-cancel" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_ebiz_shop_account" model="ir.actions.act_window">
+            <field name="name">导入支付宝对账单</field>
+            <field name="res_model">ebiz.shop.account.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="oscg_ebiz_shop_account_form"/>
+            <field name="target">new</field>
+            <field name="context">{}</field>
+        </record>
+
+    </data>
+</openerp>
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <record id="ebiz_shop_product_yf" model="product.product">
+            <field name="name">邮费</field>
+            <field name="type">service</field>
+        </record>
+
+        <record id="ebiz_shop_product_yhjk" model="product.product">
+            <field name="name">优惠减款</field>
+            <field name="type">service</field>
+        </record>
+
+    </data>
+</openerp>
