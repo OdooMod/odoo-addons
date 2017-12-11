@@ -25,7 +25,7 @@ from openerp.tools.translate import _
 from datetime import datetime, timedelta
 import sys
 import time
-import openerp.addons.ebiz_cn.top.api
+import openerp.addons.sale_taobao.top.api
 import json
 
 default_encoding = 'utf-8'

@@ -255,7 +255,7 @@
             <field name="arch" type="xml">
                 <data>
                     <xpath expr="//field[@name='name']"  position="before">
-                        <button class="oe_inline oe_stat_button" name="%(ebiz_cn.action_ebiz_shop_account)d" string="导入支付宝账单" type="action" attrs="{'invisible':[('state','=','confirm')]}" widget="statinfo" icon="fa-pencil-square-o"/>
+                        <button class="oe_inline oe_stat_button" name="%(sale_taobao.action_ebiz_shop_account)d" string="导入支付宝账单" type="action" attrs="{'invisible':[('state','=','confirm')]}" widget="statinfo" icon="fa-pencil-square-o"/>
                     </xpath>
                 </data>
             </field>        

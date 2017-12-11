@@ -9,16 +9,16 @@ from openerp.osv import fields,osv
 import json
 import hashlib
 
-from openerp.addons.ebiz_cn.top import setDefaultAppInfo
-from openerp.addons.ebiz_cn.top.api.rest import ItemsOnsaleGetRequest
-from openerp.addons.ebiz_cn.top.api.rest import TradesSoldIncrementGetRequest
-from openerp.addons.ebiz_cn.top.api.rest import ItemSkusGetRequest
-from openerp.addons.ebiz_cn.top.api.rest import TradesSoldGetRequest
-from openerp.addons.ebiz_cn.top.api.rest import TradeGetRequest
-from openerp.addons.ebiz_cn.top.api.rest import TradeFullinfoGetRequest
-from openerp.addons.ebiz_cn.top.api.rest import AlipayUserAccountreportGetRequest
-from openerp.addons.ebiz_cn.top.api.rest import ItemQuantityUpdateRequest
-from openerp.addons.ebiz_cn.top.api.rest import LogisticsOfflineSendRequest
+from openerp.addons.sale_taobao.top import setDefaultAppInfo
+from openerp.addons.sale_taobao.top.api.rest import ItemsOnsaleGetRequest
+from openerp.addons.sale_taobao.top.api.rest import TradesSoldIncrementGetRequest
+from openerp.addons.sale_taobao.top.api.rest import ItemSkusGetRequest
+from openerp.addons.sale_taobao.top.api.rest import TradesSoldGetRequest
+from openerp.addons.sale_taobao.top.api.rest import TradeGetRequest
+from openerp.addons.sale_taobao.top.api.rest import TradeFullinfoGetRequest
+from openerp.addons.sale_taobao.top.api.rest import AlipayUserAccountreportGetRequest
+from openerp.addons.sale_taobao.top.api.rest import ItemQuantityUpdateRequest
+from openerp.addons.sale_taobao.top.api.rest import LogisticsOfflineSendRequest
 
 
 _logger = logging.getLogger(__name__)

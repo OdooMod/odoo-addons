@@ -12,7 +12,7 @@ import urllib
 import time
 import hashlib
 import json
-import openerp.addons.ebiz_cn.top
+import openerp.addons.sale_taobao.top
 import itertools
 import mimetypes
 
@@ -178,9 +178,9 @@ class RestApi(object):
         self.__domain = domain
         self.__port = port
         self.__httpmethod = "POST"
-        if(openerp.addons.ebiz_cn.top.getDefaultAppInfo()):
-            self.__app_key = openerp.addons.ebiz_cn.top.getDefaultAppInfo().appkey
-            self.__secret = openerp.addons.ebiz_cn.top.getDefaultAppInfo().secret
+        if(openerp.addons.sale_taobao.top.getDefaultAppInfo()):
+            self.__app_key = openerp.addons.sale_taobao.top.getDefaultAppInfo().appkey
+            self.__secret = openerp.addons.sale_taobao.top.getDefaultAppInfo().secret
         
     def get_request_header(self):
         return {

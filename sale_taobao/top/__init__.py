@@ -3,7 +3,7 @@ Created on 2012-6-29
 
 @author: lihao
 '''
-from openerp.addons.ebiz_cn.top.api.base import sign
+from openerp.addons.sale_taobao.top.api.base import sign
 
 
 

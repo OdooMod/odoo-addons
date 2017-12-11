@@ -26,7 +26,7 @@ import time
 from datetime import datetime, timedelta
 import openerp.addons.decimal_precision as dp
 import sys
-import openerp.addons.ebiz_cn.top.api
+import openerp.addons.sale_taobao.top.api
 import json
 import logging
 
