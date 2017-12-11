@@ -1,4 +1,4 @@
-# odoo_dingtalk_login
+# Auth Dingtalk
 #### 基于钉钉扫码的odoo登录 \n
 #### 使用前需要在钉钉管理员配置;将扫码跳转地址配置为---http://baseurl/web/action_login
 #### 在钉钉后台获取到appid, appsecret,corpid, corpsecret配置到odoo配置文件；
