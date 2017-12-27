@@ -16,6 +16,23 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_period
+#: model:ir.actions.act_window,help:account_period.action_account_period_tree
+msgid ""
+"A period is a fiscal period of time during which accounting entries should "
+"be recorded for accounting related activities. Monthly period is the norm "
+"but depending on your countries or company needs, you could also have "
+"quarterly periods. Closing a period will make it impossible to record new "
+"accounting entries, all new entries should then be made on the following "
+"open period. Close a period when you do not want to record new entries and "
+"want to lock this period for tax related calculation."
+msgstr "会计期间是对会计记录人为规定的时间段。一般按月分期，按贵公司所在国家的需要也可以按季度分期。关闭的会计期间不能继续记账，只能记账在后面的会计期间。如果希望不能创建新的凭证或发生税额变动请关闭会计期间。"
+
+#. module: account_period
+#: model:ir.model,name:account_period.model_account_move
+msgid "Account Entry"
+msgstr "会计分录"
+
+#. module: account_period
 #: model:ir.ui.view,arch_db:account_period.view_account_period_form
 msgid "Account Period"
 msgstr "会计期间"
@@ -133,7 +150,7 @@ msgstr "显示名称"
 #. module: account_period
 #: model:ir.ui.view,arch_db:account_period.view_account_period_form
 msgid "Duration"
-msgstr "Duration"
+msgstr "持续时间"
 
 #. module: account_period
 #: model:ir.model.fields,field_description:account_period.field_account_fiscalyear_date_stop
@@ -220,7 +237,7 @@ msgid "Open"
 msgstr "开放"
 
 #. module: account_period
-#: code:addons/account_period/models/account_fiscalyear.py:49
+#: code:addons/account_period/models/account_fiscalyear.py:40
 #, python-format
 msgid "Opening Period"
 msgstr "开帐期间"
@@ -241,6 +258,11 @@ msgstr "期间"
 #: model:ir.model.fields,field_description:account_period.field_account_period_name
 msgid "Period Name"
 msgstr "期间名称"
+
+#. module: account_period
+#: model:ir.ui.menu,name:account_period.menu_finance_periodical_processing
+msgid "Periodic Processing"
+msgstr "期末处理"
 
 #. module: account_period
 #: model:ir.actions.act_window,name:account_period.action_account_period

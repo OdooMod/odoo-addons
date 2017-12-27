@@ -24,8 +24,9 @@ Account Period
     "data": [
         'security/account_security.xml',
         'security/ir.model.access.csv',
-        'views/account_fiscalyear_views.xml',
-        'views/account_period_views.xml'
+        'views/account_menuitem.xml',
+        'views/account_views.xml',
+        'views/account_end_fy.xml'
     ],
     'qweb': [
     ],
