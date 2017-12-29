@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="view_move_tree" model="ir.ui.view">
+        <field name="name">account.move.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_tree"/>
+        <field name="arch" type="xml">
+            <field name="date" position="before">
+                <field name="period_id" invisible="0" options='{"no_open":True}'/>
+            </field>
+            <field name="name" position="replace">
+                <field name="name" invisible="1"/>
+                <field name="voucher_name"/>
+                <field name="approval_uid"/>
+                <field name="post_uid"/>
+                <field name="cashier_uid"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_move_form">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/field[@name='state']" position="before">
+                <button name="post" states="validate" string="Post" type="object" class="oe_highlight" groups="account.group_account_invoice"/>
+                <button name="button_approval" string="审核" type="object" class="oe_highlight" groups="account.group_account_user" attrs="{'invisible':['|',('state','=','posted'),('approval_uid','!=',False)]}"/>
+                <button name="button_approval" string="取消审核" type="object" groups="account.group_account_user" attrs="{'invisible':['|',('state','=','posted'),('approval_uid','=',False)]}"/>
+                <button name="button_cashier" string="出纳签字" type="object" class="oe_highlight" groups="account.group_account_user" attrs="{'invisible':['|','|',('state','=','posted'),('liquidity','=',False),('cashier_uid','>',0)]}"/>
+                <button name="button_cashier" string="取消签字" type="object" groups="account.group_account_user" attrs="{'invisible':['|','|',('state','=','posted'),('liquidity','=',False),('cashier_uid','&lt;=',0)]}"/>
+            </xpath>
+            <xpath expr="//h1" position="after">
+                <h2 class="o_row">
+                    <div>
+                        <label for="voucher_type" class="oe_edit_only"/>
+                        <div class="o_row">
+                            <field name="voucher_type"/>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="no" class="oe_edit_only"/>
+                        <div class="o_row">
+                            <field name="no"/>
+                        </div>
+                    </div>
+                </h2>
+            </xpath>
+            <field name="ref" position="before">
+                <field name="period_id"/>
+            </field>
+            <xpath expr="//field[@name='line_ids']" position="after">
+                <group col="8">
+                    <field name="attachment_num" string="附单据数" colspan="2"/>
+                    <field name="amount_chinese" string="大写合计" colspan="6"/>
+                </group>
+                <group col="8">
+                    <field name="post_uid" readonly="1"/>
+                    <field name="approval_uid" readonly="1"/>
+                    <field name="cashier_uid" readonly="1"/>
+                    <field name="create_uid" readonly="1"/>
+                </group>
+                <group col="6">
+                    <field name="amount" invisible="1"/>
+                    <field name="liquidity" invisible="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</data>
+</openerp>
