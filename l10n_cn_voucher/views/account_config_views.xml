@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="view_account_config_settings" model="ir.ui.view">
+        <field name="name">account settings</field>
+        <field name="model">account.config.settings</field>
+        <field name="inherit_id" ref="account.view_account_config_settings"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='accounting']" position="before">
+                <group string="中国财务会计">
+                    <label for="approval" string="审核"/>
+                    <div name="approval">
+                        <div>
+                            <field name="group_post_after_approval" class="oe_inline"/>
+                            <label for="group_post_after_approval"/>
+                        </div>
+                        <div>
+                            <field name="group_same_user_approval" class="oe_inline"/>
+                            <label for="group_same_user_approval"/>
+                        </div>
+                    </div>
+                    <label for="id" string="功能"/>
+                    <div>
+                        <div>
+                            <field name="module_l10n_cn_reports" class="oe_inline"/>
+                            <label for="module_l10n_cn_reports"/>
+                            <a href="http://www.odoomk.com/china-account-module" target="_blank"> 详细信息</a>
+                        </div>
+                        <div>
+                            <field name="module_l10n_cn_dashboard" class="oe_inline"/>
+                            <label for="module_l10n_cn_dashboard"/>
+                            <a href="http://www.odoomk.com/china-account-module" target="_blank"> 详细信息</a>
+                        </div>
+                        <div>
+                            <field name="module_l10n_cn_voucher_auxiliary" class="oe_inline"/>
+                            <label for="module_l10n_cn_voucher_auxiliary"/>
+                            <a href="http://www.odoomk.com/china-account-module" target="_blank"> 详细信息</a>
+                        </div>
+                        <div>
+                            <field name="module_l10n_cn_voucher_arrange" class="oe_inline"/>
+                            <label for="module_l10n_cn_voucher_arrange"/>
+                            <a href="http://www.odoomk.com/china-account-module" target="_blank"> 详细信息</a>
+                        </div>
+                        <div>
+                            <field name="module_l10n_cn_cashflow" class="oe_inline"/>
+                            <label for="module_l10n_cn_cashflow"/>
+                            <a href="http://www.odoomk.com/china-account-module" target="_blank"> 详细信息</a>
+                        </div>
+                        <div>
+                            <field name="module_l10n_cn_carryover" class="oe_inline"/>
+                            <label for="module_l10n_cn_carryover"/>
+                            <a href="http://www.odoomk.com/china-account-module" target="_blank"> 详细信息</a>
+                        </div>
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</data>
+</openerp>
