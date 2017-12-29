@@ -84,6 +84,12 @@ msgid ""
 msgstr "单击建立新的会计年度.\n              </p><p>\n                根据需要定义公司的会计年度。会计年度通常是公司的账户最后结转的期间，通常是12个月。会计年度通常和结束日期有关。例如，假如一个公司的会计年度结束在2011年11月30日，那么在2010年30月1日至1年2011月12日的每一个交易会被记录到2011会计年度。              </p>\n            "
 
 #. module: account_period
+#: model:ir.actions.act_window,name:account_period.action_account_period_tree
+#: model:ir.ui.menu,name:account_period.menu_action_account_period_close_tree
+msgid "Close a Period"
+msgstr "关闭一个期间"
+
+#. module: account_period
 #: selection:account.fiscalyear,state:0
 #: selection:account.period,state:0
 #: model:ir.ui.view,arch_db:account_period.view_account_fiscalyear_search
@@ -212,6 +218,11 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_period
+#: model:ir.model,name:account_period.model_account_move_line
+msgid "Journal Item"
+msgstr "日记账项目"
+
+#. module: account_period
 #: model:ir.model.fields,field_description:account_period.field_account_fiscalyear___last_update
 #: model:ir.model.fields,field_description:account_period.field_account_period___last_update
 msgid "Last Modified on"
@@ -248,6 +259,8 @@ msgid "Opening/Closing Period"
 msgstr "开帐/关账期间"
 
 #. module: account_period
+#: model:ir.model.fields,field_description:account_period.field_account_move_line_period_id
+#: model:ir.model.fields,field_description:account_period.field_account_move_period_id
 #: model:ir.ui.view,arch_db:account_period.view_account_fiscalyear_form
 #: model:ir.ui.view,arch_db:account_period.view_account_period_search
 #: model:ir.ui.view,arch_db:account_period.view_account_period_tree
