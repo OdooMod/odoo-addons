@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="0">
+
+    <record id="group_post_after_approval" model="res.groups">
+        <field name="name">凭证审核后才能记账</field>
+    </record>
+
+    <record id="group_same_user_approval" model="res.groups">
+        <field name="name">制单人和审核人可为同一人</field>
+    </record>
+
+</data>
+</openerp>
