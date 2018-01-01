@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
+# Copyright 2017 Jarvis (www.odoomod.com)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, fields, api
-from openerp.exceptions import except_orm
-from openerp.report import report_sxw
-from openerp.tools.translate import _
 from math import ceil
+
+from openerp import models, api
 
 
 class AccountMoveReport(models.AbstractModel):

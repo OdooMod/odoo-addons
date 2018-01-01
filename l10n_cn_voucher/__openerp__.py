@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Jarvis (www.odoomod.com)
-# License OPL-3.0 or later (http://www.gnu.org/licenses/opl.html).
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
     'name': '中国会计财务凭证',
@@ -27,6 +27,7 @@ Account Voucher
         'views/account_config_views.xml',
         'views/account_move_views.xml',
         'views/account_move_line_views.xml',
+        'views/account_account_views.xml',
         'report/account_move_report.xml'
     ],
     'qweb': [
