@@ -13,9 +13,9 @@ Account Voucher
 """,
     'author': "Jarvis (www.odoomod.com)",
     'website': 'http://www.odoomod.com',
-    'license': 'LGPL-3',
+    'license': 'AGPL-3',
     "depends": [
-        'account_accountant','account_cancel','account_period'
+        'account_accountant','account_cancel','account_period','account_hierarchy'
     ],
     'external_dependencies': {
         'python': [],
@@ -27,6 +27,7 @@ Account Voucher
         'views/account_journals_views.xml',
         'views/account_move_views.xml',
         'views/account_move_line_views.xml',
+        'views/account_account_views.xml',
         'report/account_move_report.xml'
     ],
     'qweb': [
