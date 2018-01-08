@@ -29,7 +29,7 @@ class AccountMoveReport(models.AbstractModel):
 
     def _get_account_partner(self, id, name):
         value = 'account.account,' + str(id)
-        partner_prop_acc = self.pool.get('ir.property').search([('value_reference','=',value)], {})
+        partner_prop_acc = self.env['ir.property'].search([('value_reference','=',value)], {})
         if partner_prop_acc:
             return name
         else:

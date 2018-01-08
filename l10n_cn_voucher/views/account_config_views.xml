@@ -18,6 +18,10 @@
                             <field name="group_same_user_approval" class="oe_inline"/>
                             <label for="group_same_user_approval"/>
                         </div>
+                        <div>
+                            <field name="group_disable_auto_no" class="oe_inline"/>
+                            <label for="group_disable_auto_no"/>
+                        </div>
                     </div>
                     <label for="id" string="功能"/>
                     <div>

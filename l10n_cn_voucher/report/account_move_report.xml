@@ -39,9 +39,9 @@
                                 <span t-esc="o.voucher_name"/>
                             </div>
                             <div class="col-xs-2 text-right" >
-                                <span t-esc="paginate(o.line_id, 5) + 1" />
+                                <span t-esc="paginate(o.line_ids, 5) + 1" />
                                 <span>/</span>
-                                <sapn t-esc="paginate(o.line_id, 5)" />
+                                <sapn t-esc="paginate(o.line_ids, 5)" />
                             </div>
                         </div>
 
@@ -87,7 +87,7 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                <t t-foreach="o.line_id" t-as="l">
+                                <t t-foreach="o.line_ids" t-as="l">
                                     <tr>
                                         <td rowspan="2" height="80px">
                                             <span t-field="l.name" />

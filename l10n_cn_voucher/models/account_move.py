@@ -127,3 +127,10 @@ class AccountMove(models.Model):
                     move.write({'cashier_uid': False})
                 else:
                     move.write({'cashier_uid': self.env.uid})
+
+    @api.model
+    def create(self, vals):
+        if not vals.has_key('no') and not self.env.user.has_group('l10n_cn_voucher.group_disable_auto_no'):
+            vals['no'] = self._compute_no()
+        res = super(AccountMove,self).create(vals)
+        return res

@@ -10,6 +10,7 @@ class AccountConfigSettings(models.TransientModel):
 
     group_post_after_approval = fields.Boolean("凭证审核后才能记账",implied_group="l10n_cn_voucher.group_post_after_approval")
     group_same_user_approval = fields.Boolean("制单人和审核人可为同一人",implied_group="l10n_cn_voucher.group_same_user_approval")
+    group_disable_auto_no = fields.Boolean('自动凭证不分配凭证编号',implied_group="l10n_cn_voucher.group_disable_auto_no")
 
     module_l10n_cn_reports = fields.Boolean('财务报表')
     module_l10n_cn_dashboard = fields.Boolean('总账流程图')

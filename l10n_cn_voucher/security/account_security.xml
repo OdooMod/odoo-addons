@@ -10,5 +10,9 @@
         <field name="name">制单人和审核人可为同一人</field>
     </record>
 
+    <record id="group_disable_auto_no" model="res.groups">
+        <field name="name">自动凭证不分配凭证编号</field>
+    </record>
+
 </data>
 </openerp>
