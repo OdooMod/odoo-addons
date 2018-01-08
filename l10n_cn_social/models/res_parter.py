@@ -8,7 +8,7 @@ from odoo import fields, models
 class Partner(models.Model):
     _inherit = 'res.partner'
 
-    qq = fields.Date('QQ')
+    qq = fields.Char('QQ')
     wechat = fields.Char('微信')
     aliim = fields.Char('阿里旺旺')
     alipay = fields.Char('支付宝')
