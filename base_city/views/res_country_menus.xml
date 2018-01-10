@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem name="地区" id="menu_res_country_mgt" parent="base.menu_users"/>
+        <menuitem name="国家" id="menu_res_country" parent="menu_res_country_mgt"/>
+        <menuitem name="州/省" id="menu_res_state" parent="menu_res_country_mgt"/>
+        <menuitem name="市" action="action_res_city" id="menu_res_city" parent="menu_res_country_mgt"/>
+        <menuitem name="区" action="action_res_district" id="menu_res_district" parent="menu_res_country_mgt"/>
+    </data>
+</odoo>
