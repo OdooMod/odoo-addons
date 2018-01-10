@@ -22,6 +22,7 @@ Base City
         'bin': [],
     },
     "data": [
+       'security/ir.model.access.csv',
        'views/res_country_views.xml',
        'views/res_partner_views.xml',
        'views/res_country_menus.xml',
