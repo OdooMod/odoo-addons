@@ -20,7 +20,7 @@
             <field name="view_mode">tree</field>
         </record>
 
-        <menuitem action="action_res_race" id="menu_action_res_race" parent="base.menu_users"/>
+        <menuitem action="action_res_race" id="menu_action_res_race" parent="base.menu_administration"/>
 
     </data>
 </odoo>
